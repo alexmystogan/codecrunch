@@ -1,0 +1,26 @@
+@startuml
+
+start
+:Login;
+if (Login Berhasil?) then (yes)
+  :Pilih Room;
+  if (Masuk Room Berhasil?) then (yes)
+    :No Room = Pilihan Room;
+    while (Belum Ready?) is (yes)
+      :Tombol Ready;
+      if (Kedua Pemain Ready?) then (yes)
+        :Pertarungan Dimulai;
+        :Scan QR Code;
+        :Hitung Nilai QR Code;
+        :Tentukan Pemenang;
+      endif
+    endwhile
+  else (no)
+    :Kembali ke Pilihan Room;
+  endif
+else (no)
+  :Kembali ke Login;
+endif
+stop
+
+@enduml

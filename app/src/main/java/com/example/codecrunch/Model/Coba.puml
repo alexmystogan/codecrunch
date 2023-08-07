@@ -1,0 +1,28 @@
+@startuml
+title Game Flowchart
+
+start
+:User opens the application;
+if (User is logged in?) then (yes)
+  :Redirect to Play Activity;
+else (no)
+  :Redirect to Login Activity;
+endif
+:User plays the game;
+:Scan hero;
+:Retrieve hero data from API;
+:Compare scanned hero with other user's hero;
+if (Is it the last round?) then (yes)
+  :Calculate the winner;
+  :Display the result;
+  if (User wants to play again?) then (yes)
+    :Restart the game;
+  else (no)
+    :Redirect to Main Activity;
+  endif
+else (no)
+  :Proceed to the next round;
+endif
+stop
+
+@enduml
