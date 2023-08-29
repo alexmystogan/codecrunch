@@ -19,7 +19,7 @@ class Game_Activity :AppCompatActivity() {
 
 
         playtext.setOnClickListener {
-            val intent = Intent(this@Game_Activity,Score_Activity::class.java)
+            val intent = Intent(this@Game_Activity,Scan_Score_Activity::class.java)
             startActivity(intent)
         }
         goroom.setOnClickListener {

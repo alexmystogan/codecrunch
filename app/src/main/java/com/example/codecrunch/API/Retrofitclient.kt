@@ -8,7 +8,7 @@ import com.example.codecrunch.API.ApiInterface
 
 object Retrofitclient {
     //192.168.22.34
-    private const val BASE_URL = "http://192.168.116.97:80/"
+    private const val BASE_URL = "http://192.168.58.209:80/"
     //192.168.110.175
 
     val endpoint: ApiInterface by lazy {

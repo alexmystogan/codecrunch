@@ -44,6 +44,7 @@ class Login_Activity : AppCompatActivity() {
                         Toast.makeText(this@Login_Activity, teks, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@Login_Activity,Game_Activity::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@Login_Activity, "gagal", Toast.LENGTH_SHORT).show()
                     }

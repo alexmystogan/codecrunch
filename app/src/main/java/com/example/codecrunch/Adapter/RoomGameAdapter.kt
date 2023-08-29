@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.codecrunch.Activity.Game_Activity
-import com.example.codecrunch.Activity.Score_Activity
+import com.example.codecrunch.Activity.Scan_Score_Activity
 import com.example.codecrunch.Model.DataItemRoom
 import com.example.codecrunch.R
 
@@ -45,7 +43,7 @@ class RoomGameAdapter(private val roomList: List<DataItemRoom>?) : RecyclerView.
         init {
             // Tambahkan logika penanganan klik tombol di sini
             btnMasukRoom.setOnClickListener {
-                val intent = Intent(context, Score_Activity::class.java)
+                val intent = Intent(context, Scan_Score_Activity::class.java)
                 context.startActivity(intent)
             }
         }

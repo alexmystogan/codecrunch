@@ -18,15 +18,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.codecrunch.R
+import com.example.codecrunch.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var connTextview: TextView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-      //  connTextview = findViewById(R.id.textViewconn)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val apiInterface = Retrofitclient.endpoint
         val call = apiInterface.getPlayers()

@@ -33,7 +33,9 @@
         <activity android:name=".Activity.Login_Activity" />
         <activity android:name=".Activity.Game_Activity" />
         <activity android:name=".Activity.Room_Game_Activity" />
-        <activity android:name=".Activity.Score_Activity" />
+        <activity android:name=".Activity.Battle_Activity" />
+        <activity android:name=".Activity.Scan_Score_Activity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.Daftar_List_Semua" />
 
     </application>
