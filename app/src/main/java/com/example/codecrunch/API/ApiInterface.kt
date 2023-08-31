@@ -6,11 +6,18 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiInterface {
 
     @GET("players")
    fun getPlayers(): Call<PlayersResponse>
+
+
+    @GET("hero/{Id}")
+    fun getHero(
+        @Path("Id") ID:String
+    ): Call<HeroResponse>
 
     @GET("showroom")
     fun getRoom(): Call<ResponseRoom>
@@ -30,11 +37,5 @@ interface ApiInterface {
        @Field("matchTime") matchtime : String ,
     @Field("maxPlayer") maxplyr :String
    ) : Call<Room_Model>
-
-
-
-
-
-
 
 }

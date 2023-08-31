@@ -6,14 +6,21 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.codecrunch.API.Retrofitclient
+import com.example.codecrunch.Model.HeroResponse
+import com.example.codecrunch.Model.PlayersResponse
 
 import com.example.codecrunch.databinding.ScoreActivityBinding
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Scan_Score_Activity : AppCompatActivity() {
     private lateinit var binding: ScoreActivityBinding
@@ -33,6 +40,27 @@ class Scan_Score_Activity : AppCompatActivity() {
 
 
         scanner = IntentIntegrator(this)
+        val nilai = "4"
+
+        val apiInterface = Retrofitclient.endpoint
+        val call = apiInterface.getHero(nilai)
+        call.enqueue(object : Callback<HeroResponse>{
+            override fun onResponse(call: Call<HeroResponse>, response: Response<HeroResponse>) {
+//                if (response.isSuccessful){
+                    val body = response.body().toString()
+                Log.d("MSG","inidia"+body)
+                Toast.makeText(this@Scan_Score_Activity, body, Toast.LENGTH_SHORT).show()
+//
+//                } else {
+//                    Toast.makeText(this@Scan_Score_Activity, "teks", Toast.LENGTH_SHORT).show()
+//                }
+            }
+
+            override fun onFailure(call: Call<HeroResponse>, t: Throwable) {
+                Toast.makeText(this@Scan_Score_Activity, "teks api gagal", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
 
 
@@ -81,22 +109,31 @@ class Scan_Score_Activity : AppCompatActivity() {
         {
             if (result.contents != null)
             {
+
                 val scannedBarcode = result.contents
-                val chosenHero = determineHero(scannedBarcode)
-                var no: String? = null
-                var nama: String? = null
+                Log.d("Tag","hasilbarcode1"+scannedBarcode)
+
+                val pattern = Regex("""(\d+),"([^"]+)"""")
+                val matchResult = pattern.find(scannedBarcode)
+
+               val chosenHero = matchResult
+                val no = matchResult!!.groupValues[1].toInt()
+                var no1 = scannedBarcode[0]
+                val no1Int = no1.digitToIntOrNull()
+                val ini = 4
 
 
 
+                Log.d("Tag","hasilbarcode"+result)
+                Log.d("Tag","hasilbarcodeno"+no1)
+                Log.d("Tag","hasilbarcodeno"+no1Int)
 
+               Log.d("Tag","hasilbarcodechosen"+chosenHero)
 
-              //  Log.d("Tag","hasilbarcode"+result)
-                Log.d("Tag","hasilbarcode"+no)
-                Log.d("Tag","hasilbarcode"+nama)
-                Log.d("Tag","hasilbarcode"+chosenHero)
-
-                performActionBasedOnHero(chosenHero)
-                Log.d("Tag","hasilbarcode"+ performActionBasedOnHero(chosenHero))
+                if (no1Int != null) {
+                    performActionBasedOnHero(no1Int)
+                }
+                Log.d("Tag","hasilbarcode"+ performActionBasedOnHero(no))
             }
             else
             {
@@ -109,51 +146,43 @@ class Scan_Score_Activity : AppCompatActivity() {
         }
 
     }
-    private fun determineHero(barcode: String): String {
-        val no : String
-        val nama : String
-        val pattern = Regex("""(\d+),"([^"]+)"""")
-        val matchResult = pattern.find(barcode)
 
-        if (matchResult != null) {
-             no = matchResult.groupValues[1].toString()
-        }
-        if (matchResult != null) {
-             nama = matchResult.groupValues[2].toString()
-        }
 
-        return matchResult!!.groupValues[2].toString();
-    }
+    private fun performActionBasedOnHero(hero: Int) {
 
-    private fun performActionBasedOnHero(hero: String) {
-        val heroname : String
-        heroname = hero
-        if (heroname == "kizaru") {
 
-            val alamat  = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2023/07/29/252416054.jpeg"
-            imageplayer1 = alamat
-            val atkhero = 1000
-            val atkhero2 = 5000
-            attack1 = atkhero
-            attack2 = atkhero2
 
-            Glide.with(binding.imageView2.context)
-                .asBitmap()
-                .load(alamat)
-                .into(binding.imageView2)
-        } else {
-            val alamat2  = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2023/07/29/252416054.jpeg"
-            imageplayer2 = alamat2
-            val atkhero2 = 5000
-            val atkhero = 1000
-            attack1 = atkhero
-            attack2 = atkhero2
 
-            Glide.with(binding.imageView2.context)
-                .asBitmap()
-                .load(alamat2)
-                .into(binding.imageView2)
-        }
+
+
+//        val heroname : String
+//        heroname = hero
+//        if (heroname == "kizaru") {
+//
+//            val alamat  = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2023/07/29/252416054.jpeg"
+//            imageplayer1 = alamat
+//            val atkhero = 1000
+//            val atkhero2 = 5000
+//            attack1 = atkhero
+//            attack2 = atkhero2
+//
+//            Glide.with(binding.imageView2.context)
+//                .asBitmap()
+//                .load(alamat)
+//                .into(binding.imageView2)
+//        } else {
+//            val alamat2  = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2023/07/29/252416054.jpeg"
+//            imageplayer2 = alamat2
+//            val atkhero2 = 5000
+//            val atkhero = 1000
+//            attack1 = atkhero
+//            attack2 = atkhero2
+//
+//            Glide.with(binding.imageView2.context)
+//                .asBitmap()
+//                .load(alamat2)
+//                .into(binding.imageView2)
+//        }
 
     }
 

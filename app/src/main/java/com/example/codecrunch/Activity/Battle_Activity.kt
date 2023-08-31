@@ -121,14 +121,6 @@ Log.d("TAG","IniAtak"+atkbaru)
                 var nama: String? = null
 
 
-
-
-
-              //  Log.d("Tag","hasilbarcode"+result)
-                Log.d("Tag","hasilbarcode"+no)
-                Log.d("Tag","hasilbarcode"+nama)
-                Log.d("Tag","hasilbarcode"+chosenHero)
-
                 performActionBasedOnHero(chosenHero)
                 Log.d("Tag","hasilbarcode"+ performActionBasedOnHero(chosenHero))
             }
